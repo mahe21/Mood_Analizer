@@ -1,20 +1,40 @@
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+
+using MoodAnalizer;
 
 namespace TestProject1
 {
     public class Tests
     { 
 
-        [TestMethod]
-        [DataRow(null)]
-        public void Test1(string message)
+        [Test]
+        public void Test1()
         {
-            string expected = "happy";
-            MoodAnalizer.moodAnalizer Analize = new MoodAnalizer.moodAnalizer(message);
+            try
+            {
+                string message = "";
+                MoodAnalizer.moodAnalizer Analize = new MoodAnalizer.moodAnalizer(message);
+                string mood = Analize.AnalizeMood();
+            }
+            catch (AnalizerException e)
+            {
+                Assert.AreEqual("message must not be empty", e.Message);
+            }
+            
+        }
+        [Test]
+        public void Test2()
+        {
+            try
+            {
+                string message = null;
+                MoodAnalizer.moodAnalizer Analize = new MoodAnalizer.moodAnalizer(message);
+                string mood = Analize.AnalizeMood();
+            }
+            catch (AnalizerException e)
+            {
+                Assert.AreEqual("message should not be null", e.Message);
+            }
 
-            string mood = Analize.AnalizeMood();
-
-            Microsoft.VisualStudio.TestTools.UnitTesting.Assert.AreEqual(expected, mood);
         }
     }
 }

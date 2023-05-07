@@ -19,7 +19,11 @@ namespace MoodAnalizer
         {
             try
             {
-                if (this.message.Contains("sad"))
+                if(this.message.Equals(string.Empty))
+                {
+                    throw new AnalizerException(AnalizerException.ExceptionType.Empty_Message, "message must not be empty");
+                }
+                if(this.message.Contains("sad"))
                 {
                     return "sad";
                 }
@@ -27,12 +31,10 @@ namespace MoodAnalizer
                 {
                     return "happy";
                 }
-
             }
-            catch
+            catch(NullReferenceException)
             {
-                return "happy";
-
+                throw new AnalizerException(AnalizerException.ExceptionType.Null_Message, "message should not be null");
             }
             
         }
