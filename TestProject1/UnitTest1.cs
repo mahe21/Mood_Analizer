@@ -1,18 +1,20 @@
+using Microsoft.VisualStudio.TestTools.UnitTesting;
+
 namespace TestProject1
 {
     public class Tests
     { 
 
-        [Test]
-        public void Test1()
+        [TestMethod]
+        [DataRow(null)]
+        public void Test1(string message)
         {
-            string expected = "sad";
-            string message = "sad";
+            string expected = "happy";
             MoodAnalizer.moodAnalizer Analize = new MoodAnalizer.moodAnalizer(message);
 
             string mood = Analize.AnalizeMood();
 
-            Assert.AreEqual(expected, mood);
+            Microsoft.VisualStudio.TestTools.UnitTesting.Assert.AreEqual(expected, mood);
         }
     }
 }
